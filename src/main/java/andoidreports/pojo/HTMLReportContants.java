@@ -1,4 +1,4 @@
-package pojo;
+package andoidreports.pojo;
 
 public class HTMLReportContants {
     public static String CHROME_DRIVER_PATH = "/Users/rthaka/Uber/chromedriver";

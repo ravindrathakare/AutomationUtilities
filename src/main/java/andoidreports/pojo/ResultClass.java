@@ -1,4 +1,4 @@
-package pojo;
+package andoidreports.pojo;
 public class ResultClass
 {
     private String id;

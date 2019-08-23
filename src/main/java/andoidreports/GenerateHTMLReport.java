@@ -1,3 +1,5 @@
+package andoidreports;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.openqa.selenium.By;
@@ -6,8 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pojo.HTMLReportContants;
-import pojo.ResultClass;
+import andoidreports.pojo.HTMLReportContants;
+import andoidreports.pojo.ResultClass;
 
 import java.io.File;
 import java.io.FileWriter;
