@@ -32,7 +32,7 @@ public class GenerateHTMLReport {
     private static  List<ResultClass> RESULT_LIST = new ArrayList<>();
     private static File folder = new File("Execution_Report_"+new Date());
     private static List<HashMap <String,String>> overallResult = new ArrayList<>();
-    private static int pass = 0 ,fail = 0 ;
+    private static int pass = 0 ,fail = 0, error = 0 ;
 
 
     public static ChromeDriver geWebDrivertInstance() {
@@ -87,7 +87,7 @@ public class GenerateHTMLReport {
     public static HashMap <String,String>   getPassFailCount(ResultClass[] resultClass)
     {
         HashMap<String,String> resultMap= new HashMap<>();
-        int passCount=0,failCount=0;
+        int passCount=0,failCount=0,errorCount =0;
         for(ResultClass result: resultClass)
         {
             RESULT_LIST.add(result);
@@ -98,10 +98,13 @@ public class GenerateHTMLReport {
             else
             if (result.getStatus().equalsIgnoreCase("fail"))
                 failCount+=1;
+            if (result.getStatus().equalsIgnoreCase("error"))
+                errorCount+=1;
         }
         resultMap.put("TOTAL",String.format("%s",passCount+failCount));
         resultMap.put("PASS",String.format("%s",passCount));
         resultMap.put("FAIL",String.format("%s",failCount));
+        resultMap.put("ERROR",String.format("%s",errorCount));
         return resultMap;
     }
 
@@ -172,7 +175,7 @@ public class GenerateHTMLReport {
         String th_row = "";
         String div = "";
         String href = "";
-        script += String.format(HTMLReportContants.SCRIPT,resultMap.get("PASS"),resultMap.get("FAIL"),"TEST RUN DETAILS");
+        script += String.format(HTMLReportContants.SCRIPT,resultMap.get("PASS"),resultMap.get("FAIL"),resultMap.get("ERROR"),"TEST RUN DETAILS");
         th_row += String.format(HTMLReportContants.TR, HTMLReportContants.TH_TESTNAME+ HTMLReportContants.TH_STATUS+ HTMLReportContants.TH_BUILD+ HTMLReportContants.TH_TESTNAME);
 
         for(ResultClass result: resultClass)
@@ -218,15 +221,16 @@ public class GenerateHTMLReport {
 
             href = String.format(HTMLReportContants.HREF, resultClass.get("REPORT_LINK"),resultClass.get("TESTCASENAME"));
             String columnTestName = String.format(HTMLReportContants.TD_TESTNAME,href);
-            String columnStatus = String.format(HTMLReportContants.TD_STATUS, resultClass.get("PASS")) + String.format(HTMLReportContants.TD_STATUS, resultClass.get("FAIL"));
+            String columnStatus = String.format(HTMLReportContants.TD_STATUS, resultClass.get("PASS")) + String.format(HTMLReportContants.TD_STATUS, resultClass.get("FAIL")) + String.format(HTMLReportContants.TD_STATUS, resultClass.get("ERROR"));
             data_row += String.format(HTMLReportContants.TR,columnTestName + columnStatus);
             pass += Integer.parseInt(resultClass.get("PASS"));
             fail += Integer.parseInt(resultClass.get("FAIL"));
+            error += Integer.parseInt(resultClass.get("ERROR"));
         }
 
 
-        script += String.format(HTMLReportContants.SCRIPT, pass, fail,"OVERALL EXECUTION SUMMARY");
-        th_row += String.format(HTMLReportContants.TR, HTMLReportContants.TH_TESTNAME + HTMLReportContants.TH_PASS_COUNT + HTMLReportContants.TH_FAIL_COUNT );
+        script += String.format(HTMLReportContants.SCRIPT, pass, fail,error,"OVERALL EXECUTION SUMMARY");
+        th_row += String.format(HTMLReportContants.TR, HTMLReportContants.TH_TESTNAME + HTMLReportContants.TH_PASS_COUNT + HTMLReportContants.TH_FAIL_COUNT + HTMLReportContants.TH_ERROR_COUNT);
         table += String.format(HTMLReportContants.TABLE, th_row + data_row);
         head += String.format(HTMLReportContants.HEAD, script + HTMLReportContants.STYLE);
         div += String.format(HTMLReportContants.DIV, table);
