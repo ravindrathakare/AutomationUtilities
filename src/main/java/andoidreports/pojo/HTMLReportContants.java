@@ -1,5 +1,4 @@
 package andoidreports.pojo;
-
 public class HTMLReportContants {
     public static String CHROME_DRIVER_PATH = "/Users/rthaka/Uber/chromedriver";
     public static String TEST_ANALYZER = "https://test-analyzer.uberinternal.com/test-case-results?testCaseName=%s";
@@ -9,12 +8,12 @@ public class HTMLReportContants {
             "        google.charts.load(\"current\", {packages:[\"corechart\"]});\n" +
             "        google.charts.setOnLoadCallback(drawChart);\n" +
             "        function drawChart() {\n" +
-            "            var data = google.visualization.arrayToDataTable([['Task','Execution'],['PASS',%s], ['FAIL',%s],]);\n" +
+            "            var data = google.visualization.arrayToDataTable([['Task','Execution'],['PASS',%s], ['FAIL',%s],['ERROR',%s],]);\n" +
             "\n" +
             "            var options = {\n" +
             "                title: '%s',\n" +
             "                is3D: true,\n" +
-            "                colors: ['#19e63d', '#e61725']\n" +
+            "                colors: ['#19e63d', '#e61725','#1c91c0']\n" +
             "            };\n" +
             "\n" +
             "            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));\n" +
@@ -116,6 +115,7 @@ public class HTMLReportContants {
     public static String TH_STATUS="<th align=\"left\" onclick=sortTable(1)> STATUS</th>";
     public static String TH_PASS_COUNT="<th align=\"left\" > PASS COUNT</th>";
     public static String TH_FAIL_COUNT="<th align=\"left\"> FAIL COUNT</th>";
+    public static String TH_ERROR_COUNT="<th align=\"left\"> ERROR COUNT</th>";
     public static String TH_BUILD="<th align=\"left\" > BUILD </th>";
     public static String TH_DATE="<th align=\"left\" onclick=sortTable(0)> DATE AND TIME </th>";
 
