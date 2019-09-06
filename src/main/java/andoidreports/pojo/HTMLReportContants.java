@@ -1,6 +1,6 @@
 package andoidreports.pojo;
 public class HTMLReportContants {
-    public static String CHROME_DRIVER_PATH = "/Users/rthaka/Uber/chromedriver";
+    public static String CHROME_DRIVER_PATH = "/Users/<username>/Uber/chromedriver";
     public static String TEST_ANALYZER = "https://test-analyzer.uberinternal.com/test-case-results?testCaseName=%s";
     public static String TEST_CASE_LIST = "TestCases.txt";
 
